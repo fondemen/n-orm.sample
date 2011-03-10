@@ -1,8 +1,8 @@
-package org.norm.sample.businessmodel;
+package com.googlecode.n_orm.sample.businessmodel;
 
 import java.util.Date;
 
-import org.norm.Persisting;
+import com.googlecode.n_orm.Persisting;
 
 
 @Persisting

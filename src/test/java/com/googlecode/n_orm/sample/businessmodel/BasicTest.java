@@ -1,4 +1,4 @@
-package org.norm.sample.businessmodel;
+package com.googlecode.n_orm.sample.businessmodel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,9 +13,13 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.norm.DatabaseNotReachedException;
-import org.norm.PersistingElement;
-import org.norm.StorageManagement;
+
+import com.googlecode.n_orm.DatabaseNotReachedException;
+import com.googlecode.n_orm.PersistingElement;
+import com.googlecode.n_orm.StorageManagement;
+import com.googlecode.n_orm.sample.businessmodel.Book;
+import com.googlecode.n_orm.sample.businessmodel.BookStore;
+import com.googlecode.n_orm.sample.businessmodel.Novel;
 
 
 public class BasicTest {
