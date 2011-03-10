@@ -2,8 +2,9 @@ package org.norm.sample.businessmodel;
 
 import java.util.Date;
 
-import com.mt.storage.Key;
-import com.mt.storage.Persisting;
+import org.norm.Key;
+import org.norm.Persisting;
+
 
 @Persisting
 public class Book {

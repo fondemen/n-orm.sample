@@ -1,7 +1,7 @@
 package org.norm.sample.businessmodel;
 
-import com.mt.storage.Key;
-import com.mt.storage.Persisting;
+import org.norm.Key;
+import org.norm.Persisting;
 
 @Persisting
 public class BookStore {

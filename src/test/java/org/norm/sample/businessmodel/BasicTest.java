@@ -13,10 +13,10 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.norm.DatabaseNotReachedException;
+import org.norm.PersistingElement;
+import org.norm.StorageManagement;
 
-import com.mt.storage.DatabaseNotReachedException;
-import com.mt.storage.PersistingElement;
-import com.mt.storage.StorageManagement;
 
 public class BasicTest {
 	//Store for tests is given in /src/test/resources/org/norm/sample/businessmodel/store.properties
