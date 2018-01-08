@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fondemen/n-orm.sample.svg?branch=redis)](https://travis-ci.org/fondemen/n-orm.sample)
+
 This is an example project using n-orm for Redis.
 See https://github.com/fondemen/n-orm.core/ and https://github.com/fondemen/n-orm.redis/ for more details and updates.
 
