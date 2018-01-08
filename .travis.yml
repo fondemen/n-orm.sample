@@ -1,0 +1,5 @@
+sudo: required
+language: java
+before_script:
+  - .travis/hbase-install.sh
+script: mvn package assembly:single && java -ea -jar target/sample-*-jar-with-dependencies.jar
