@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fondemen/n-orm.sample.svg?branch=memory)](https://travis-ci.org/fondemen/n-orm.sample)
+
 This is an example project using n-orm using the embedded non-persistent non-distributed memory store. See https://github.com/fondemen/n-orm.core/ for more details.
 
 Check other branches of this project to see how to use another store, such as mongo, hbase-1.0 or redis.
