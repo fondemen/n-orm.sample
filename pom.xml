@@ -3,15 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.n_orm</groupId>
 	<artifactId>sample</artifactId>
-	<version>hbase-${hbase.version}-n_orm-${n-orm.version}</version>
+	<version>hbase-${hbase.driver.version}-n_orm-${n-orm.version}</version>
 	<name>Sample n-orm project</name>
 	<description>Simple starter project.</description>
 	<properties>
 		<java.version>1.6</java.version>
 		<n-orm.version>0.0.1-SNAPSHOT</n-orm.version>
+		<hbase.driver.version>1.0</hbase.driver.version>
 		<hbase.version>1.0.1.1</hbase.version>
-		<aspectj.version>1.7.4</aspectj.version>
-		<plugin.aspectj.version>1.6</plugin.aspectj.version>
+		<aspectj.version>1.8.13</aspectj.version>
+		<plugin.aspectj.version>1.8</plugin.aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<packaging>jar</packaging>
@@ -103,14 +104,17 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.n_orm</groupId>
+			<artifactId>storage</artifactId>
+			<version>${n-orm.version}</version>
+		</dependency>
 
 		<!-- HBase-specific dependencies -->
 		<dependency>
 			<groupId>com.googlecode.n_orm</groupId>
 			<artifactId>hbase</artifactId>
-			<version>hbase-${hbase.version}-n-orm-${n-orm.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>hbase-${hbase.driver.version}-n-orm-${n-orm.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.n_orm</groupId>
