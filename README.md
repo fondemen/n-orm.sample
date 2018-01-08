@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fondemen/n-orm.sample.svg?branch=mongo)](https://travis-ci.org/fondemen/n-orm.sample)
+
 This is an example project using n-orm for Mongo.
 See https://github.com/fondemen/n-orm.core/ and https://github.com/fondemen/n-orm.mongo/ for more details and updates.
 
