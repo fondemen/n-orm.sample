@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fondemen/n-orm.sample.svg?branch=hbase-1.0)](https://travis-ci.org/fondemen/n-orm.sample)
+
 This is an example project using n-orm for HBase.
 See http://n-orm.googlecode.com for more details and updates (look at sources).
 

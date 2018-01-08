@@ -119,7 +119,7 @@
 		<dependency>
 			<groupId>com.googlecode.n_orm</groupId>
 			<artifactId>hbase</artifactId>
-			<version>hbase-${hbase.version}-n-orm-${n-orm.version}</version>
+			<version>hbase-${hbase.driver.version}-n-orm-${n-orm.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
