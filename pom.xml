@@ -3,18 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.n_orm</groupId>
 	<artifactId>sample</artifactId>
-	<version>hbase-${hbase.version}-n_orm-${n-orm.version}</version>
+	<version>mongo-${n-orm.version}</version>
 	<name>Sample n-orm project</name>
 	<description>Simple starter project.</description>
 	<properties>
 		<java.version>1.6</java.version>
 		<n-orm.version>0.0.1-SNAPSHOT</n-orm.version>
-		<hbase.version>0.94.6</hbase.version>
 		<aspectj.version>1.8.13</aspectj.version>
 		<plugin.aspectj.version>1.8</plugin.aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<packaging>jar</packaging>
 	<build>
 		<plugins>
 
@@ -26,8 +24,6 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<skipMain>true</skipMain> <!-- should compile with AspectJ instead -->
-					<!-- no need to exclude tests as no persisting class is defined there -->
-					<!-- >skip>true</skip-->  <!-- should compile with AspectJ instead -->
 				</configuration>
 			</plugin>
 
@@ -66,7 +62,7 @@
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.2.1</version>
 				<configuration>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
@@ -79,6 +75,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 	<dependencies>
 		<dependency>
@@ -89,54 +86,35 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.n_orm</groupId>
-			<artifactId>storage</artifactId>
-			<version>${n-orm.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
-		<!-- HBase-specific dependencies -->
 		<dependency>
 			<groupId>com.googlecode.n_orm</groupId>
-			<artifactId>hbase</artifactId>
-			<version>hbase-${hbase.version}-n-orm-${n-orm.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.n_orm</groupId>
-			<artifactId>hbase</artifactId>
-			<version>hbase-${hbase.version}-n-orm-${n-orm.version}</version>
+			<artifactId>storage</artifactId>
+			<version>${n-orm.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.googlecode.n_orm</groupId>
-			<artifactId>hbase-test-deps</artifactId>
-			<version>hbase-${hbase.version}-SNAPSHOT</version>
-			<type>pom</type>
-			<scope>test</scope>
+			<artifactId>mongo</artifactId>
+			<version>${n-orm.version}</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>org.apache.hbase</groupId>
+			<!-- Necessary because of the @HBaseSchema annotation used in Book ; otherwise could be removed -->
+			<groupId>com.googlecode.n_orm</groupId>
 			<artifactId>hbase</artifactId>
-			<version>${hbase.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-core</artifactId>
-			<version>1.0.4</version>
+			<version>hbase-0.90.3-n-orm-0.0.1-SNAPSHOT</version> <!-- first version with this feature -->
+			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
 	<repositories>
 		<repository>
 			<id>org.sonatype.oss.public</id>
@@ -144,33 +122,4 @@
 			<url>http://oss.sonatype.org/content/groups/public</url>
 		</repository>
 	</repositories>
-
-	<profiles>
-		<profile>
-			<id>hbase-cdh</id>
-			<properties>
-				<hbase.version>0.94.6-cdh4.4.0</hbase.version>
-			</properties>
-
-			<repositories>
-
-				<repository>
-					<id>cdh.releases.repo</id>
-					<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-					<name>CDH Releases Repository</name>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</repository>
-				<repository>
-					<id>cdh.snapshots.repo</id>
-					<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-					<name>CDH Snapshots Repository</name>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-		</profile>
-	</profiles>
 </project>
