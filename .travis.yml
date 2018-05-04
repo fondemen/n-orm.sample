@@ -2,4 +2,4 @@ sudo: required
 language: java
 before_script:
   - .travis/hbase-install.sh
-script: {mvn test || mvn test || mvn test ;} && mvn -DskipTests package assembly:single && java -ea -jar target/sample-*-jar-with-dependencies.jar
+script: ( mvn test || mvn test || mvn test ; ) && mvn -DskipTests package assembly:single && java -ea -jar target/sample-*-jar-with-dependencies.jar
