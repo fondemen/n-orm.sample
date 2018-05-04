@@ -7,14 +7,19 @@ import java.io.IOException;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.io.compress.Compression.Algorithm;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Test;
 
+import com.googlecode.n_orm.DatabaseNotReachedException;
 import com.googlecode.n_orm.PersistingMixin;
+import com.googlecode.n_orm.ProcessException;
 import com.googlecode.n_orm.PropertyManagement;
 import com.googlecode.n_orm.StoreSelector;
+import com.googlecode.n_orm.hbase.HBaseLauncher;
 import com.googlecode.n_orm.hbase.Store;
 
 public class HBaseTest extends BasicTest {
@@ -28,15 +33,15 @@ public class HBaseTest extends BasicTest {
 	 public void compression() throws IOException {
 		//src/test/resources/com/googlecode/n_orm/sample/businessmodel/store.properties defines the HBase store
 		com.googlecode.n_orm.storeapi.Store ast = StoreSelector.getInstance().getStoreFor(Book.class);
-		if (! (ast instanceof Store)) //In case you've changed the default store
+		if (! (ast instanceof Store) || HBaseLauncher.hBaseServer != null) //In case you've changed the default store
 			return;
 		Store st = (Store) ast;
 		//According to src/test/resources/com/googlecode/n_orm/sample/businessmodel/store.properties, should be GZ
-		assertTrue(st.getCompression().equals("gz"));
+		assertEquals("gz", st.getCompression());
 		//Checking with HBase that the property column family is actually stored in GZ
-		HBaseAdmin admin = new HBaseAdmin(st.getConnection());
+		Admin admin = st.getConnection().getAdmin();
 		try {
-			HTableDescriptor td = admin.getTableDescriptor(Bytes.toBytes(PersistingMixin.getInstance().getTable(Book.class) /*could be bsut.getTable()*/));
+			HTableDescriptor td = admin.getTableDescriptor(TableName.valueOf(PersistingMixin.getInstance().getTable(Book.class) /*could be bsut.getTable()*/));
 			//Getting the property CF descriptor
 			HColumnDescriptor pd = td.getFamily(Bytes.toBytes(PropertyManagement.PROPERTY_COLUMNFAMILY_NAME));
 			//According to src/test/resources/com/googlecode/n_orm/sample/businessmodel/store.properties, should GZ

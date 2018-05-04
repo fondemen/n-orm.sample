@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -354,9 +355,9 @@ public class BasicTest {
 		 assertTrue(storeBooks.contains(n));
 	 }
 
-	 //Must have a default constructor (or no constructor...)
 		public static class BookSetter implements Process<Book> {
-		private static final long serialVersionUID = -7258359759953024740L;
+			
+			private static final long serialVersionUID = -7258359759953024740L;
 			private short value;
 		
 			public BookSetter(short val) {
@@ -369,12 +370,15 @@ public class BasicTest {
 				element.store();
 			}
 		}
-	 @Test(timeout=60000) public void testSetBooksWithMapReduce() throws DatabaseNotReachedException, InstantiationException, IllegalAccessException, InterruptedException {
+	 @Test(timeout=120000) public void testSetBooksWithMapReduce() throws DatabaseNotReachedException, InstantiationException, IllegalAccessException, InterruptedException {
 		WaitingCallBack wc = new WaitingCallBack();
 		StorageManagement.findElements().ofClass(Book.class).withKey("bookStore").setTo(bssut).withAtMost(10000).elements().andActivate().remoteForEach(new BookSetter((short) 50), wc, 100, 1000);
 		//withAtMost is not necessary using HBase as com.googlecode.n_orm.hbase.Store implements com.googlecode.n_orm.storeapi.ActionnableStore
 		wc.waitProcessCompleted(); //Nothing happens up to the end of the Map/Reduce task ; in case you do not use an com.googlecode.n_orm.storeapi.ActionnableStore, this action is performed on this thread, i.e. all elements are downloaded and iterated here
-		assertNull(wc.getError());
+		if (wc.getError() != null) {
+			wc.getError().printStackTrace();
+			fail(wc.getError().getMessage());
+		}
 		 
 		boolean hasABook = false;
 		for (Book b : bssut.getBooks()) {
@@ -411,7 +415,7 @@ public class BasicTest {
 		assertEquals(bsut, b2);
 	 }
 	 
-	 @Ignore @Test public void importExport() throws IOException, ClassNotFoundException, DatabaseNotReachedException, ReadException {
+	 @Test public void importExport() throws IOException, ClassNotFoundException, DatabaseNotReachedException, ReadException {
 		 //Reusable query
 		SearchableClassConstraintBuilder<Book> query = StorageManagement.findElements().ofClass(Book.class).andActivateAllFamilies().withAtMost(1000).elements();
 		
